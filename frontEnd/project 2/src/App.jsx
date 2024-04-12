@@ -3,6 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
+import NavigationBar from './components/NavigationBar'
+import HomePage from './pages/HomePage'
+import ErrorPage from './pages/ErrorPage'
+import AboutPage from './pages/AboutPage'
+import RestaurantPage from './pages/RestaurantPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +19,7 @@ function App() {
           <div>
             <h1>PROJECT2</h1>
 
-            <Navbar />
+            <NavigationBar />
           </div>
         </header>
 
