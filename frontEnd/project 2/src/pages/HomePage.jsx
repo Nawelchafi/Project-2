@@ -62,10 +62,10 @@ const HomePage = () => {
               <h4>{restaurant.name}</h4>
               <img src={restaurant.squareImgUrl} alt="" />
               <p>{restaurant.averageRating}</p>
-              <p>{restaurant.awardInfo}</p>
+              {/* <p>{restaurant.awardInfo}</p>
               <p>{restaurant.establishmentTypeAndCuisineTags}</p>
               <p>{restaurant.offers}</p>
-              <p>{restaurant.priceTag}</p>
+              <p>{restaurant.priceTag}</p> */}
 
             </li>
           ))
