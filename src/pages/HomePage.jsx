@@ -4,18 +4,18 @@ import axios from 'axios'
 
 const HomePage = () => {
   const [restaurants, setRestaurants] = useState([])
-  const options = {
-    method: 'GET',
-    url: 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants',
-    params: {
-      locationId: '304554'
-    },
-    headers: {
-      'X-RapidAPI-Key': '894e6ec872msh92a314ed75a21adp1a73d4jsnb937ff5a34ea',
-      'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
-    }
+  // const options = {
+  //   method: 'GET',
+  //   url: 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants',
+  //   params: {
+  //     locationId: '304554'
+  //   },
+  //   headers: {
+  //     'X-RapidAPI-Key': '894e6ec872msh92a314ed75a21adp1a73d4jsnb937ff5a34ea',
+  //     'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
+  //   }
 
-  };
+  // };
   // const options = {
   //   method: 'GET',
   //   url: 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchLocation',
@@ -42,15 +42,15 @@ const HomePage = () => {
 
 
 
-  const getAllRestaurants = async () => {
-    const response = await axios.request(options);
-    setRestaurants(response.data.data.data)
-    console.log(response.data.data.data)
-  };
+  // const getAllRestaurants = async () => {
+  //   const response = await axios.request(options);
+  //   setRestaurants(response.data.data.data)
+  //   console.log(response.data.data.data)
+  // };
 
-  useEffect(() => {
-    getAllRestaurants()
-  }, [])
+  // useEffect(() => {
+  //   getAllRestaurants()
+  // }, [])
   return (
     <div>
       <ul>
