@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-
 import './styles.css';
 
 // import required modules
@@ -30,6 +29,7 @@ export default function Slider() {
         <SwiperSlide>Slide 7</SwiperSlide>
         <SwiperSlide>Slide 8</SwiperSlide>
         <SwiperSlide>Slide 9</SwiperSlide>
+        <SwiperSlide>Slide 10</SwiperSlide>
       </Swiper>
     </>
   );

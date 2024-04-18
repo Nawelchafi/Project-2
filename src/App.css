@@ -1,9 +1,25 @@
 /*connect fonds*/
-a{
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: rgb(157, 157, 204);
+}
+
+a {
   text-decoration: none;
   cursor: pointer;
-  
+
 }
-button{
+
+button {
   cursor: pointer;
 }
