@@ -7,20 +7,22 @@ const SearchBar = ({ setResults }) => {
   
 
   const fetchData = (value) => {
-    fetch("https://restaurant-beckend.adaptable.app")
+    fetch("https://ih-countries-api.herokuapp.com/countries")
       .then((response) => response.json())
       .then((json) => {
         console.log(json)
-        const results = json.filter((user) => {
-          return (
-            value &&
-            user &&
-            user.name &&
-            user.name.toLowerCase().includes(value)
+        // console.log(data.capital)
+        onSearch(prev => 
+          prev.filter(item => 
+           item.name.toLowerCase().includes(searchQuery.toLowerCase()) )
+          
+           
+            
+            
           );
         });
         setResults(results);
-      });
+      };
   };
 
   const handleChange = (value) => {
@@ -38,10 +40,20 @@ const SearchBar = ({ setResults }) => {
       />
     </div>
   );
-};
+
 export default SearchBar
 
+// )
+// };
 
+// return (
+// <form className="search-style" onSubmit={handleSubmit}>
+//  <input style={{width:'500px'} } type="text" value={searchQuery} onChange={handleInput} />
+ 
+//  <button type="submit">Search</button>
+// </form>
+// )
+// }
 
 
 
