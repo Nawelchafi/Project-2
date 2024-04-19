@@ -4,24 +4,6 @@ import "./SearchBar.css";
 
 const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
-  // const [searchQuery, setSearchQuery] = useState('');
-
-  // // Function to handle the form input change
-  // const handleInput = (e) => {
-  //   setSearchQuery(e.target.value);
-  // };
-
-  // // Function to handle the form submission
-  // const handleSubmit = (e) => {
-  //   // Prevent page reload on form submit
-  //   e.preventDefault();
-  //   // Do something with the search query string ...
-  //   console.log("Search query: ", searchQuery); 
-  //   if (!searchQuery){
-  //     onSearch(API_URL)
-  //     return
-  //   }
-  
 
   const fetchData = (value) => {
     fetch("https://ih-countries-api.herokuapp.com/countries")
