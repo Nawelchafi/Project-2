@@ -1,4 +1,4 @@
-import './LoginRegister.css'
+import './RegisterPage.css'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ return (
                     </div>
 
                     <div className='remember-forgot'>
-                        <label><input type='checkbox' />
+                        <label><input className='checkbox' type='checkbox' />
                             I agree to the terms & conditions</label>
                     </div>
                     <button type='submit'>Register</button>

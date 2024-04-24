@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+
 // import { GiHamburgerMenu } from "react-icons/gi";
 // import { RxCross2 } from "react-icons/rx";
 // import PopUpBurgerMenu from './PopUpBurgerMenu';
@@ -12,40 +12,45 @@ const navBarConfig = [{
   link: '/',
   title: 'Home'
 }, {
-  link: '/',
+  link: '/discover',
   title: 'Discover'
 }, {
-  link: '/',
+  link: '/blog',
   title: 'Blog',
 }, {
-  link: '/',
+  link: '/about',
   title: 'About',
 }, {
   link: '/city',
   title: 'City',
 },
   {
-  link: '/',
+  link: '/login',
   title: 'Login',
 }]
 
 const Navbar = () => {
   return (
     <div>
-      <h1>FlaverFinds</h1>
-      <nav className='flex'>
-        <Link className='' to='/'>
+      <nav className='nav'>
+      
+      <Link className='' to='/'>
           <img className='logo-style' src={Logo} alt="logo" />
         </Link>
-        <NavLink to='/'>logo</NavLink>
-        <ul>
+        <h1 className='title'>FlaverFinds</h1>
+        
+        <div className='subtitle'>
+        Find places to eat
+        </div>
+        <Link to='/'></Link>
+        <ul className='nav-list'>
           {navBarConfig.map(item => (
             <li key={item.title}>
-              <NavLink to={item.link}>{item.title} </NavLink>
+              <Link to={item.link}>{item.title} </Link>
             </li>
           ))}
         </ul>
-      </nav>
+        </nav>
     </div>
   )
 }

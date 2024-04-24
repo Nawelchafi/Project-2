@@ -1,14 +1,16 @@
-/* .wrapper {
-    position: relative;
+.wrapper {
     width: 420px;
     height: 450px;
-    background: transparent;
-    border-radius: 10px;
-    color: #fff;
+
+}
+
+.container {
+
     display: flex;
+    justify-content: center;
     align-items: center;
-    overflow: hidden;
-    transition: .2s ease;
+    min-height: 100vh;
+    background-image: url('../../assets/registerbg.webp');
 }
 
 .wrapper.active {
@@ -21,9 +23,6 @@
     padding: 40px;
 
 }
-
-
-
 
 form h1 {
     font-size: 36px;
@@ -50,6 +49,10 @@ form .input-box {
     color: #fff;
     padding: 20px 45px 20px 20px;
 
+
+}
+.checkbox {
+    width: 10px;
 }
 
 .input-box input::placeholder {
@@ -113,9 +116,10 @@ form .input-box.register {
 .wrapper .form-box.register {
     position: absolute;
     transition: none;
-    translate: 400px;
+
 
 }
+
 .form .remember-forgot label input {
     font-size: 14.5px;
     margin: -15px 0 15px;
@@ -139,17 +143,7 @@ form .register-link {
 
 }
 
-/* .wrapper .form-box.login {
-    transition: .18s ease;
-    translate: 0;
-} */
-
 .wrapper.active .form-box.login {
     transition: none;
-    translate: -400px;
-}
 
-/* .wrapper.active .form-box.register {
-    transition: .18s ease;
-    translate: 0;
-} */ */
+}

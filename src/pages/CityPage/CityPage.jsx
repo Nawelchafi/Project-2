@@ -25,7 +25,8 @@ const CityPage = () => {
   return (
     
     <div className='all-cities'>
-      <div className='container'>
+      <div>
+        <h2>Top 10 best cities in the world: </h2>
         <ul className='all-cities-list'>
           {cities.map((city) => (
             <li key={city.id}>
@@ -37,7 +38,11 @@ const CityPage = () => {
              <Link className='all-cities-link' to={`/city/${city.id}`}>
                 Show more information
               </Link>
+              
+              
+              
             </li>
+            
           )
           )}
         </ul>

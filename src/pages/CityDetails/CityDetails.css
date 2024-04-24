@@ -1,7 +1,7 @@
 .details-page {
     display: flex;
-    padding-top: 200px;
-    /* background: url(../../assets/page.jpg) no-repeat; */
+    padding-top: 50px;
+    background-color: antiquewhite;
     background-size: cover;
     min-height: 100vh;
     padding-bottom: 50px;
@@ -18,9 +18,17 @@
     position: relative;
 
 }
+
 .page-item img {
-    max-width:400px ;
-    width:100% ;
+    max-width: 400px;
+    width: 100%;
+}
+.page-item span {
+   font-style: italic;
+   font-weight: bold;
+}
+.page-item p {
+    
 }
 
 .btn-style {
@@ -39,6 +47,18 @@
     justify-content: center;
     gap: 20px;
 }
+
+.show-restaurants {
+    background-color: gray;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    color: #000;
+    border: none;
+    margin-top: 20px;
+}
+
+
 /* .message {
     position: absolute;
     background-color: #fff;

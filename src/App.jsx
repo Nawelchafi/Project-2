@@ -12,38 +12,41 @@ import CityDetails from './pages/CityDetails/CityDetails'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import RestaurantDetailsPage from './pages/RestaurantDetailsPage/RestaurantDetailsPage'
+import CityRestaurantsPage from './pages/CityRestaurantsPage/CityRestaurantsPage'
+
 
 
 function App() {
-  // const [results, setResults] = useState([])
+  const [user, setUser] = useState(null)
+  console.log(user)
   return (
     <>
+   
       <div className="App">
         <header>
-          {/* <h1 className="text-3xl font-bold underline"></h1> */}
           <Navbar />
-          {/* <SearchBar setResults={setResults}/> */}
-          {/* <SearchResultsList /> */}
-<div>
-  Search results
-</div>
+          
         </header>
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/city" element={<CityPage />} />
-          <Route path="/city/:cityId" element={<CityDetails />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/restaurants/:restaurantId" element={<RestaurantDetailsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {
+            user && <><Route path="/city" element={<CityPage />} />
+            <Route path="/city/:cityId" element={<CityDetails />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/restaurants/:restaurantId" element={<RestaurantDetailsPage />} /><Route path="/cities/:cityName/restaurants" element={<CityRestaurantsPage />} />
+            <Route path="/cities/:cityName/restaurants" element={<CityRestaurantsPage />} />
+            </>
+          }
           
+          <Route path="/login" element={<LoginPage handlerUser = {setUser} />} />
+          <Route path="/register" element={<RegisterPage handlerUser = {setUser} />} />
           
-
           <Route path="*" element={<ErrorPage />} />
+
         </Routes>
       </div>
-
+     
     </>
   )
 }

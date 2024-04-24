@@ -1,0 +1,8 @@
+.home-container {
+    padding-top: 50px;
+    background-image: none;
+    background-color: antiquewhite;
+    background-size: cover;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}

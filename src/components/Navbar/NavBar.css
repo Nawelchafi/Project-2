@@ -1,0 +1,25 @@
+.logo-style {
+    width: 80px;
+    
+}
+.title {
+    font-size: 30px;
+}
+.subtitle {
+    margin-top: 70px;
+    font-size: 50px;
+    margin-bottom: 20px;
+    
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background-color: rgb(190, 171, 145);
+}
+.nav-list {
+    display: flex;
+    gap: 30px;
+
+}

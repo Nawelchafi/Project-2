@@ -12,7 +12,7 @@ const CityDetails = () => {
   const navigate = useNavigate();
 //   const [isPopUpOpen, setPopUpOpen] = useState(false)
   const { cityId } = useParams()
-  const [city, setCity] = useState({})
+  const [city, setCity] = useState(null)
   
 //   const [message, setMessage] = useState(null)
   const getOneCity = () => {
@@ -35,19 +35,34 @@ const CityDetails = () => {
 //       }, 3000)
 //     }
 //   }, [isPopUpOpen])
+if (!city) {
+  return <h2>Loading</h2>
 
+}
 return (
     <div className='details-page'>
       <div className='container'>
         <div className='page-item'>
 
           <img src={city.imgUrl} alt={city.name} />
-          <h4>Name: {city.name}</h4>
-          <p>Latitude: {city.latitude}</p>
-          <p>Longitude: {city.longitude}</p>
-          <p>Country: {city.country}</p>
-          <p>Population: {city.population}</p>
-          <p>Description: {city.description}</p>
+          <h2>
+            <span>Name:</span> {city.name}
+            </h2>
+          <p>
+            <span>Latitude:</span> {city.latitude}
+            </p>
+          <p>
+            <span>Longitude:</span> {city.longitude}
+            </p>
+          <p>
+            <span>Country:</span> {city.country}
+            </p>
+          <p>
+            <span>Population:</span> {city.population}
+            </p>
+          <p>
+            <span>Description:</span> {city.description}
+            </p>
         
           {/* {isPopUpOpen && <div className='message'>
             <IoIosCheckmarkCircle />{message.message}</div>} */}
@@ -59,6 +74,9 @@ return (
           </Link> */}
           {/* <button className='btn-style' onClick={handleDelete}>Delete</button> */}
           <button className='btn-style' onClick={() => navigate(-1)}>Go back</button>
+          <Link className='show-restaurants' to={`/cities/${city.name}/restaurants`}>
+              Show restaurants 
+              </Link>
         </div>
       </div>
     </div>

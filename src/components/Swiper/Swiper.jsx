@@ -1,36 +1,63 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './styles.css';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+import './Swiper.css'
 
-// import required modules
-import { Pagination } from 'swiper/modules';
+
+const API_URL = 'https://restaurant-beckend.adaptable.app'
 
 export default function Slider() {
+  const [cities, setCities] = useState([])
+  // const params = useParams()
+
+  const getAllCities = () => {
+    axios
+      .get(`${API_URL}/city`)
+      // /${params.dishes} (all 'category' change to the 'params.dishes')
+      .then((response) => setCities(response.data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getAllCities()
+
+  }, [])
+  console.log(cities)
   return (
-    <>
+    <div className='swiper-container'>
+    
       <Swiper
         slidesPerView={3}
+        navigation={true}
+        loop={true}
         spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-        <SwiperSlide>Slide 10</SwiperSlide>
+        {cities.map(item => (
+          <SwiperSlide className='styleslide' key={item.id}>
+            <Link to={`/city/${item.id}`}>
+              <div className='picture-wrapper'>
+              <img className='picture' src={item.imgUrl} alt="" />
+              <p className='picturetext'>{item.name}</p>
+              </div>
+            </Link>
+          </SwiperSlide>
+        ))}
+
       </Swiper>
-    </>
+    </div>
   );
 }
