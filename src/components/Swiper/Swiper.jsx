@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import './Swiper.css'
+import 'swiper/css/navigation';
 
 
 const API_URL = 'https://restaurant-beckend.adaptable.app'

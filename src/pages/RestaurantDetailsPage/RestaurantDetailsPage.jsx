@@ -2,29 +2,82 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
-import { FaRankingStar } from "react-icons/fa6";
-import { FaAward } from "react-icons/fa6";
-import { BsClockFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneVolume } from "react-icons/fa6";
-import { IoIosStar } from "react-icons/io";
+import ReactStars from "react-rating-stars-component"
+import SearchBar from '../../components/SearchBar/SearchBar';
+import './RestaurantDetailsPage.css'
+import { CgWebsite } from "react-icons/cg";
+import { useNavigate } from 'react-router-dom';
+import DatePickerForm from '../../components/DatePickerForm/DatePickerForm';
+
 
 
 const days = ['Sunday', 'Monday', 'Thuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
 const RestaurantDetailsPage = () => {
+
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [time, setTime] = useState('10:00');
   const { restaurantId } = useParams()
   const [restaurant, setRestaurant] = useState(null)
+  const navigate = useNavigate();
+
+  console.log(restaurantId)
+
   const options = {
     method: 'GET',
     url: `http://localhost:5002/restaurants/${restaurantId}`,
-    // params: {
-    //   location: 'Amsterdam'
-    // },
+
     headers: {
+      // 'Authorization': 'Bearer etUZ3WYi8nfnjU2OB6SqQsFsA91R0-tThuzbgOaeaC2zcTWjt4a26Owz317kieHFNgh9cvLwKwPbFxMlpTh1KDxZihtNOlsfPonbbKNB2Dx7KkylY3DgRCe9VlgaZnYx'
       'Authorization': 'Bearer etUZ3WYi8nfnjU2OB6SqQsFsA91R0-tThuzbgOaeaC2zcTWjt4a26Owz317kieHFNgh9cvLwKwPbFxMlpTh1KDxZihtNOlsfPonbbKNB2Dx7KkylY3DgRCe9VlgaZnYx'
     },
 
   }
+
+  // const optionsAdress = {
+  //   method: 'GET',
+  //   url: 'https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi',
+  //   params: {
+  //     address: `Chocolatería San Ginés`
+  //   },
+  //   headers: {
+  //     'X-RapidAPI-Key': '894e6ec872msh92a314ed75a21adp1a73d4jsnb937ff5a34ea',
+  //     'X-RapidAPI-Host': 'address-from-to-latitude-longitude.p.rapidapi.com'
+  //   }
+  // };
+  //   const [longitude, setLongitude] = useState('')
+  //   const [latitude, setLatitude] = useState('')
+  //   const [street, setStreet] = useState('')
+  //   const [addressnumber, setaddressnumber] = useState('')
+  //   const [postalcode, setpostalcode] = useState('')
+  //   const [city, setCity] = useState('')
+  //   const [region, setRegion] = useState('')
+  //   const [country, setCountry] = useState('')
+
+
+
+  // const getAddress = async()=> {
+  //   try{
+  //   const response = await axios.request(optionsAddress);
+  //   console.log(response.data.Results)
+  //   const data = response.data.Results[0]
+  //   setLongitude(data.longitude)
+
+  //     console.log(longitude);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+
+  // }
+  //  useEffect(()=> {
+  //   getAdress()
+  //  },[]) 
+
+
+
   // const options = {
   //   method: 'GET',
   //   url: 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/getRestaurantDetails',
@@ -37,6 +90,8 @@ const RestaurantDetailsPage = () => {
   //     'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
   //   }
   // }
+
+
   const getDetailsRestaurants = async () => {
     const response = await axios.request(options);
     setRestaurant(response.data)
@@ -47,39 +102,98 @@ const RestaurantDetailsPage = () => {
     getDetailsRestaurants()
 
   }, [])
+
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+  }
+
   if (!restaurant) {
     return <h2>Loading</h2>
-
   }
+  // Generate a random integer between min (inclusive) and max (inclusive)
+  function getRandomInt() {
+    return Math.floor(Math.random() * (30 - 5 + 1)) + 5;
+  }
+
   return (
     <div>
-      <img src={restaurant.image_url} alt="" />
-      <h2>{restaurant.name}</h2>
-      {restaurant.attributes.menu_url && <a href={`${restaurant.attributes.menu_url}`}>Menu</a>}
-      {restaurant.is_closed ? (<p>Open</p>) : (<p>Closed</p>)}
-      <p><IoIosStar />{restaurant.rating}</p>
-      <p>{restaurant.attributes.menu_url}</p>
-      <p>Cuisine:{restaurant.categories.map(item => (<span key={item.alias}>{item.title}</span>))}</p>
-      <p><FaLocationDot /> {restaurant.location.address1}</p>
+      <SearchBar />
 
-      <div>Open days: {restaurant.hours.map(item => (
-        <div key={item.day}>
-          <p>{days[item.day]}</p>
-          <p>Start:{item.start.slice(0, 2)}:{item.start.slice(-2)}</p>
-          <p>Close:{item.end.slice(0, 2)}:{item.end.slice(-2)}</p>
-          {item.is_overnight && <p>Working</p>}
+      <DatePickerForm time={time}
+        onChangeTime={setTime}
+        date={startDate}
+        onChange={setStartDate} />
+
+      <div className='rest-page-container'>
+        <div>
+          <button className='rest-details-btn' onClick={() => navigate(-1)}>Go Back</button>
         </div>
-      ))}</div>
+        <div className='rest-details-wrapper'>
+          <div className='rest-photo'>
+            <img className='rest-details-photo' src={restaurant.image_url} alt="" />
+          </div>
+          <div className='rest-details-container'>
+            <div className='details-wrapper'>
+              <h4>Details</h4>
+              <h2 className='rest-details-subtitle'>{restaurant.name}</h2>
 
-      <p><MdEmail /> <a href='mailto:restaurant@gmail.com'>restaurant@gmail.com</a> </p>
-      <p><FaPhoneVolume /> <a href={`tel:${restaurant.phone}`}></a>{restaurant.display_phone}</p>
-      <p> <a href={`${restaurant.url}`}>website</a></p>
-      <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2694.1831510540733!2d19.06032231539076!3d47.52529717917932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dbf3d291d317%3A0xce5d360b0de82dd1!2zQnVkYXBlc3QsIFbDoWNpIMO6dCA3Ni10MSwgMTEzMyDQktC10L3Qs9GA0LjRjw!5e0!3m2!1sru!2sua!4v1650316046959!5m2!1sru!2sua"
-                                width="600" height="450" style={{ "border": 0 }} allowFullScreen="" loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"></iframe>
+              <a className='rest-menu' href={`${restaurant.attributes?.menu_url}`}>Menu</a>
+              <p>Price: {getRandomInt()} <span>&#8364;</span></p>
+              {restaurant.is_closed ? (<p className='rest-open'>Open</p>) : (<p className='rest-close'>Closed</p>)}
+
+              <div className='rest-details-stars'>
+                <p>Rating:</p>
+                <ReactStars
+                  isHalf={true}
+                  value={restaurant.rating}
+                  activeColor="#ffd700"
+                  count={5}
+                  onChange={ratingChanged}
+                  size={24}
+
+                />
+                <p>{restaurant.rating}</p>
+              </div>
+              <ul className='rest-list'><p>Cuisine:</p>{restaurant.categories.map(item => (<li key={item.alias}>{item.title}</li>))}</ul>
+              <div className='open-days'> <p>Open days:</p> {restaurant.hours[0].open.map(item => (
+                <div className='rest-start-close' key={item.day}>
+                  <p>{days[item.day]}</p>
+                  <div >
+                    <p>Start:{item.start.slice(0, 2)}:{item.start.slice(-2)}</p>
+                    <p>Close:{item.end.slice(0, 2)}:{item.end.slice(-2)}</p>
+                    {item.is_overnight && <p>Working</p>}
+                  </div>
+                </div>
+              ))}</div>
+            </div>
+            <div>
+              <div className='rest-info'>
+                <h4>Location and contact</h4>
+                <p><FaLocationDot /> {restaurant.location.address1}</p>
+                <p><MdEmail /> <a href='mailto:restaurant@gmail.com'>restaurant@gmail.com</a> </p>
+                <p><FaPhoneVolume /> <a href={`tel:${restaurant.phone}`}>{restaurant.display_phone}</a></p>
+                <p> <CgWebsite /><a href={`${restaurant.url}`}>website</a></p>
+
+                <div className='map'>
+                  <iframe
+                    // src={'https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyAv82eqKbZOaEU4RyRYOFBs0Tz7tlOEM4Y'}
+                    src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d338.3397555421225!2d151.21314029242754!3d-33.85956641319514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae67d5541c77%3A0x8af817cc7e3857d7!2sAria%20Restaurant%20Sydney!5e0!3m2!1ses!2smx!4v1578622220577!5m2!1ses!2smx'
+                    // src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d338.3397555421225!2d${restaurant?.coordinates?.longitude}!3d${restaurant?.coordinates?.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae67d5541c77%3A0x8af817cc7e3857d7!2sAria%20Restaurant%20${'Amsterdam'}!5e0!3m2!1ses!2smx!4v1578622220577!5m2!1ses!2smx`}
+                    //  src = {`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d338.3397555421225!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae67d5541c77%3A0x8af817cc7e3857d7!2s${street}%20${addressnumber},%20${postalcode},%20${city},%20${region},%20${country}`}
+                    width="350" height="270" style={{ "border": 0 }} allowFullScreen="" loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
+
 
 export default RestaurantDetailsPage

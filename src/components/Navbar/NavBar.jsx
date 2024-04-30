@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import { useState, useEffect } from 'react';
+import Slogan from '../Slogan/Slogan';
+
 
 // import { GiHamburgerMenu } from "react-icons/gi";
 // import { RxCross2 } from "react-icons/rx";
@@ -11,10 +13,8 @@ import Logo from "../../assets/logo.png";
 const navBarConfig = [{
   link: '/',
   title: 'Home'
-}, {
-  link: '/discover',
-  title: 'Discover'
-}, {
+},
+{
   link: '/blog',
   title: 'Blog',
 }, {
@@ -24,7 +24,7 @@ const navBarConfig = [{
   link: '/city',
   title: 'City',
 },
-  {
+{
   link: '/login',
   title: 'Login',
 }]
@@ -33,15 +33,11 @@ const Navbar = () => {
   return (
     <div>
       <nav className='nav'>
-      
-      <Link className='' to='/'>
+
+        <Link className='' to='/'>
           <img className='logo-style' src={Logo} alt="logo" />
         </Link>
         <h1 className='title'>FlaverFinds</h1>
-        
-        <div className='subtitle'>
-        Find places to eat
-        </div>
         <Link to='/'></Link>
         <ul className='nav-list'>
           {navBarConfig.map(item => (
@@ -50,7 +46,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        </nav>
+      </nav>
     </div>
   )
 }

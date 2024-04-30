@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import './LoginPage.css';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaLockOpen } from "react-icons/fa";
 
 const LoginPage = ({ handlerUser }) => {
+const [isPasswordShow, setPasswordShow] = useState(false)
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-const navigate = useNavigate()
+    const navigate = useNavigate()
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         handlerUser({ name, password });
@@ -26,20 +29,22 @@ const navigate = useNavigate()
                                 placeholder='Username'
                                 required
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
+                                onChange={(e) => setName(e.target.value)} />
                             <FaUser className='icon' />
                         </div>
 
                         <div className='input-box'>
                             <input
-                                type='password'
+                                type={isPasswordShow?'text':'password'} 
                                 placeholder='Password'
                                 required
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <FaLock className='icon' />
+                                onChange={(e) => setPassword(e.target.value)} />
+                            {!isPasswordShow && <FaLock className='icon' onClick={()=> setPasswordShow(true)} />}
+
+
+                            {isPasswordShow && <FaLockOpen className='icon' onClick={()=> setPasswordShow(false)} />}
+                            
                         </div>
 
                         <div className='remember-forgot'>
@@ -47,7 +52,6 @@ const navigate = useNavigate()
                                 <input className='checkbox' type='checkbox' />
                                 Remember me
                             </label>
-                            {/* Using Link component for proper navigation */}
                             <Link to='/forgot-password'>Forgot password?</Link>
                         </div>
 

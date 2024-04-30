@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import './SearchBar.css'
 import { useNavigate } from "react-router-dom";
+import Slogan from "../Slogan/Slogan";
 
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
   const [result, setResults] = useState("");
-const navigate = useNavigate()
+
+  const navigate = useNavigate()
+  
   const fetchData = () => {
     fetch("https://ih-countries-api.herokuapp.com/countries")
       .then((response) => response.json())
@@ -32,15 +35,18 @@ const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Additional actions on form submit if needed
   };
   const handleResultClick = (res) => {
     // setInput(res.capital);
-    // setResults(""); // Clear the selected result
+    setResults(""); // Clear the selected result
+setInput('')
     navigate(`/cities/${res.capital[0]}/restaurants`)
   };
   return (
     <div className="input-wrapper">
+      <div className='subtitle'>
+       <Slogan/> 
+        </div>
       <form className="form-style" onSubmit={handleSubmit}>
         <input
           style={{ width: "500px" }}
@@ -59,8 +65,7 @@ const navigate = useNavigate()
           result.map((result) => (
            <div 
               onClick={() => handleResultClick(result)}
-
-              className="search-result"
+            className="search-result"
               key={result.area}
             >
               {result.capital[0]}

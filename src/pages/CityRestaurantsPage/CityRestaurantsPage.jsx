@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom';
-
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import './CityRestaurantsPage.css'
+import ReactStars from "react-rating-stars-component"
+import SearchBar from '../../components/SearchBar/SearchBar';
+import SortedRestaurants from '../../components/SortedRestaurants/SortedRestaurants';
 
 const CityRestaurantsPage = () => {
   const [restaurants, setRestaurants] = useState([])
-  const {cityName} = useParams()
+  const { cityName } = useParams()
+  const navigate = useNavigate()
+
   const options = {
     method: 'GET',
     url: 'http://localhost:5002',
@@ -13,50 +18,86 @@ const CityRestaurantsPage = () => {
       location: cityName
     },
     headers: {
+      // 'Authorization': 'Bearer etUZ3WYi8nfnjU2OB6SqQsFsA91R0-tThuzbgOaeaC2zcTWjt4a26Owz317kieHFNgh9cvLwKwPbFxMlpTh1KDxZihtNOlsfPonbbKNB2Dx7KkylY3DgRCe9VlgaZnYx'
       'Authorization': 'Bearer etUZ3WYi8nfnjU2OB6SqQsFsA91R0-tThuzbgOaeaC2zcTWjt4a26Owz317kieHFNgh9cvLwKwPbFxMlpTh1KDxZihtNOlsfPonbbKNB2Dx7KkylY3DgRCe9VlgaZnYx'
     },
 
-}
-const getAllRestaurants = async () => {
-  const response = await axios.request(options);
-  setRestaurants(response.data.businesses)
-  console.log(response.data.businesses)
+  }
+
+  const getAllRestaurants = async () => {
+    try {
+      const response = await axios.request(options);
+      console.log(response.status)
+      setRestaurants(response.data.businesses)
+
+    } catch (error) {
+      console.log(error)
+      navigate('/not-found')
+    }
 };
 
+  
 useEffect(() => {
-  getAllRestaurants()
-}, [])
-if (!restaurants.length) {
-  return <h2>Loading</h2>
+    getAllRestaurants()
+  }, [])
 
-}
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+  if (!restaurants.length) {
+    return <h2>Loading</h2>
+
+  }
   return (
+    <div className='city-rest-searchbar'>
+      <SearchBar />
+      <div>
+        <button className='city-rest-button' onClick={() => navigate(-1)}>Go Back</button>
+      </div>
+      <SortedRestaurants restaurants={restaurants} setRestaurants={setRestaurants} />
 
+      <div className='city-rest-container'>
+        <div className='city-rest-wrapper'>
+          <ul className='city-rest-list-style'>
+            {
+              restaurants.map((restaurant) => (
+                <li className='city-rest-item-style' key={restaurant.id}>
 
-    <div>
-      <ul>
-      {
+                  <img className='city-rest-photo' src={restaurant.image_url} alt="" />
+                  <div>
+                    <h4 className='city-rest-subtitle'>{restaurant.name}</h4>
 
-        restaurants.map((restaurant) => (
+                    <div className='city-res-stars'>
+                      <ReactStars
+                        isHalf={true}
+                        value={restaurant.rating}
+                        activeColor="#ffd700"
+                        count={5}
+                        onChange={ratingChanged}
+                        size={24}
 
-          <li key={restaurant.id}>
+                      />
+                      <p>{restaurant.rating}</p>
+                    </div>
 
-            <img src={restaurant.image_url} alt="" />
-            <h4>{restaurant.name}</h4>
-            <p>{restaurant.rating}</p>
-            {restaurant.is_closed?(<p>Open</p>):(<p>Closed</p>)}
-            {/* {restaurant.awardInfo && <p>{restaurant.awardInfo.awardType}</p>} */}
-            {/* {restaurant.establishmentTypeAndCuisineTags.length && <p>{restaurant.establishmentTypeAndCuisineTags.join(', ')}</p>} */}
-            <p>{restaurant.price}</p>
-            {<p>Reviews count: {restaurant.review_count}</p>}
-      
-            <Link to={`/restaurants/${restaurant.id}`}>
-              Show more details
-            </Link>
-          </li>
-        ))
-      }
-    </ul>
+                    {restaurant.is_closed ? (<p className='city-rest-open'>Open</p>) : (<p className='city-rest-close'>Closed</p>)}
+                    <p>{restaurant.price}</p>
+                    {<h3>Reviews count: {restaurant.review_count}</h3>}
+                    <div className='city-rest-btn'>
+                      <Link to={`/restaurants/${restaurant.id}`}>
+                        Show more details
+                      </Link>
+
+                    </div>
+
+                  </div>
+
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }

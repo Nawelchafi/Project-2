@@ -1,25 +1,22 @@
 .logo-style {
-    width: 80px;
+    width: 150px;
     
 }
 .title {
     font-size: 30px;
 }
-.subtitle {
-    margin-top: 70px;
-    font-size: 50px;
-    margin-bottom: 20px;
-    
-}
+
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    background-color: rgb(190, 171, 145);
+    background-color: rgb(201, 185, 164);
 }
 .nav-list {
     display: flex;
     gap: 30px;
+    font-size: 20px;
+    text-decoration: underline;
 
 }
