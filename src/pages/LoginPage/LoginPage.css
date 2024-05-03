@@ -16,7 +16,8 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('../../assets/registerbg.webp') no-repeat;
+  
+background: url('../../assets/bg.jpg');
   background-size: cover;
  }
  
@@ -34,6 +35,7 @@
 form h1 {
     font-size: 36px;
     text-align: center;
+    
 }
 
 form .input-box {
@@ -73,7 +75,9 @@ form .input-box {
     translate: 0 -50%;
     font-size: 16px;
 }
-
+.forgot-password-bg a {
+    color: #fff;
+}
 form .remember-forgot {
     display: flex;
     justify-content: space-between;

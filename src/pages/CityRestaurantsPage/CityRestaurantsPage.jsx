@@ -27,7 +27,7 @@ const CityRestaurantsPage = () => {
   const getAllRestaurants = async () => {
     try {
       const response = await axios.request(options);
-      console.log(response.status)
+     
       setRestaurants(response.data.businesses)
 
     } catch (error) {
@@ -42,7 +42,7 @@ useEffect(() => {
   }, [])
 
   const ratingChanged = (newRating) => {
-    console.log(newRating);
+   
   };
   if (!restaurants.length) {
     return <h2>Loading</h2>

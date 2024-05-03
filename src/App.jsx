@@ -14,33 +14,35 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import RestaurantDetailsPage from './pages/RestaurantDetailsPage/RestaurantDetailsPage'
 import CityRestaurantsPage from './pages/CityRestaurantsPage/CityRestaurantsPage'
 import Footer from './components/Footer/Footer'
+import BlogDetailsPage from './pages/BlogPage/BlogDetailsPage/'
+import SingleBlogPage from './pages/BlogPage/SingleBlogPage'
  
-
-
-
 
 function App() {
   const [user, setUser] = useState(null)
-  console.log(user)
+ 
   return (
     <>
       <div className="App">
         <header>
-          <Navbar />
+          
+          <Navbar user={user} onLogOut={setUser}/>
          
         </header>
 
         <Routes>
           <Route path="/" element={<HomePage />} />
 
-          {/* { */}
-          {/* //  !user &&  */}
+       
+          {/* { !user &&  */}
 
-          <><Route path="/city" element={<CityPage />} />
+          <><Route path="/city" element={<CityPage user={user} />} />
             <Route path="/city/:cityId" element={<CityDetails />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/restaurants/:restaurantId" element={<RestaurantDetailsPage />} />
-            <Route path="/cities/:cityName/restaurants" element={<CityRestaurantsPage />} />
+            <Route path="/cities/:cityName/restaurants" element={<CityRestaurantsPage user={user} />} />
+            <Route path="/blogs" element={<BlogDetailsPage user={user}/>}></Route>
+            <Route path="/blogs/:blogId" element={<SingleBlogPage />}></Route>
           </>
           {/* } */}
 

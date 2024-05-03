@@ -47,6 +47,9 @@ const CityDetails = () => {
     <div className='details-page'>
 
       <SearchBar />
+      <div >
+      <button className='btn-style'  onClick={() => navigate(-1)}>Go back</button>
+      </div>
       <div className='city-container'>
 
 
@@ -77,7 +80,7 @@ const CityDetails = () => {
           <div className='page-item-btn-wrapper'>
 
 
-            <button className='btn-style' onClick={() => navigate(-1)}>Go back</button>
+            
             <Link className='show-restaurants' to={`/cities/${city.name}/restaurants`}>
               Show restaurants
             </Link>

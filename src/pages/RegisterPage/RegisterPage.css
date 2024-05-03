@@ -5,18 +5,18 @@
 }
 
 .container {
-
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('../../assets/registerbg.webp');
+    background: url('../../assets/bg.jpg');
+    background-size: cover;
+    min-height: 95vh;
 }
 
 .wrapper.active {
     height: 520px;
 }
-
 
 .wrapper .form-box {
     width: 100%;
@@ -51,6 +51,7 @@ form .input-box {
 
 
 }
+
 .checkbox {
     width: 10px;
 }

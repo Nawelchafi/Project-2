@@ -27,7 +27,7 @@ export default function Slider() {
     getAllCities()
 
   }, [])
-  console.log(cities)
+ 
   return (
     <div className='swiper-container'>
     

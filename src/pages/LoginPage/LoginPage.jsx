@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
 import { FaUser, FaLock } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { FaLockOpen } from "react-icons/fa";
 
 const LoginPage = ({ handlerUser }) => {
@@ -15,7 +15,7 @@ const [isPasswordShow, setPasswordShow] = useState(false)
         handlerUser({ name, password });
         navigate('/')
     };
-
+    
     return (
         <div className='login-container'>
             <div className={`wrapper active`}>
@@ -50,9 +50,12 @@ const [isPasswordShow, setPasswordShow] = useState(false)
                         <div className='remember-forgot'>
                             <label>
                                 <input className='checkbox' type='checkbox' />
-                                Remember me
-                            </label>
-                            <Link to='/forgot-password'>Forgot password?</Link>
+                               Remember me
+                                </label>
+                           <div className='forgot-password-bg'>
+                           <Link to='/forgot-password'>Forgot password?</Link>
+                           </div>
+                       
                         </div>
 
                         <button type='submit'>Login</button>

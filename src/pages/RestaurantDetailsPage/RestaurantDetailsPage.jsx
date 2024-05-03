@@ -10,21 +10,17 @@ import './RestaurantDetailsPage.css'
 import { CgWebsite } from "react-icons/cg";
 import { useNavigate } from 'react-router-dom';
 import DatePickerForm from '../../components/DatePickerForm/DatePickerForm';
-
-
+import { IoIosCheckmarkCircle } from "react-icons/io";
 
 const days = ['Sunday', 'Monday', 'Thuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 const RestaurantDetailsPage = () => {
-
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [time, setTime] = useState('10:00');
+  const [isPopUpOpen, setPopUpOpen] = useState(false)
   const { restaurantId } = useParams()
   const [restaurant, setRestaurant] = useState(null)
   const navigate = useNavigate();
 
-  console.log(restaurantId)
+  
 
   const options = {
     method: 'GET',
@@ -32,79 +28,32 @@ const RestaurantDetailsPage = () => {
 
     headers: {
       // 'Authorization': 'Bearer etUZ3WYi8nfnjU2OB6SqQsFsA91R0-tThuzbgOaeaC2zcTWjt4a26Owz317kieHFNgh9cvLwKwPbFxMlpTh1KDxZihtNOlsfPonbbKNB2Dx7KkylY3DgRCe9VlgaZnYx'
-      'Authorization': 'Bearer etUZ3WYi8nfnjU2OB6SqQsFsA91R0-tThuzbgOaeaC2zcTWjt4a26Owz317kieHFNgh9cvLwKwPbFxMlpTh1KDxZihtNOlsfPonbbKNB2Dx7KkylY3DgRCe9VlgaZnYx'
+      'Authorization': 'Bearer JXXHOVlHRLEajOQgflKqOCXi4a5xBGiPf4CkE9lvYELjPUDqVT7MTnTG5lasLKpbHM-Ex1DcMvwc-EZzEhxc-pBaDqyKYV2Txp6nQ8FHwQxeq78kUxTjNRWKiPMnZnYx'
     },
 
   }
-
-  // const optionsAdress = {
-  //   method: 'GET',
-  //   url: 'https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi',
-  //   params: {
-  //     address: `Chocolatería San Ginés`
-  //   },
-  //   headers: {
-  //     'X-RapidAPI-Key': '894e6ec872msh92a314ed75a21adp1a73d4jsnb937ff5a34ea',
-  //     'X-RapidAPI-Host': 'address-from-to-latitude-longitude.p.rapidapi.com'
-  //   }
-  // };
-  //   const [longitude, setLongitude] = useState('')
-  //   const [latitude, setLatitude] = useState('')
-  //   const [street, setStreet] = useState('')
-  //   const [addressnumber, setaddressnumber] = useState('')
-  //   const [postalcode, setpostalcode] = useState('')
-  //   const [city, setCity] = useState('')
-  //   const [region, setRegion] = useState('')
-  //   const [country, setCountry] = useState('')
-
-
-
-  // const getAddress = async()=> {
-  //   try{
-  //   const response = await axios.request(optionsAddress);
-  //   console.log(response.data.Results)
-  //   const data = response.data.Results[0]
-  //   setLongitude(data.longitude)
-
-  //     console.log(longitude);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-
-  // }
-  //  useEffect(()=> {
-  //   getAdress()
-  //  },[]) 
-
-
-
-  // const options = {
-  //   method: 'GET',
-  //   url: 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/getRestaurantDetails',
-  //   params: {
-  //     restaurantsId: restaurantId,
-  //     currencyCode: 'USD'
-  //   },
-  //   headers: {
-  //     'X-RapidAPI-Key': '894e6ec872msh92a314ed75a21adp1a73d4jsnb937ff5a34ea',
-  //     'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
-  //   }
-  // }
-
-
   const getDetailsRestaurants = async () => {
     const response = await axios.request(options);
     setRestaurant(response.data)
-    console.log(response.data)
+   
   };
-  console.log(restaurant)
+  const handleReserve = (formData) => {
+    if (formData.date && formData.persons) { setPopUpOpen(true) }
+  }
+
   useEffect(() => {
     getDetailsRestaurants()
 
   }, [])
+  useEffect(() => {
+    if (isPopUpOpen) {
+      setTimeout(() => {
+        setPopUpOpen(false)
+      }, 7000)
+    }
+  }, [isPopUpOpen])
 
   const ratingChanged = (newRating) => {
-    console.log(newRating);
   }
 
   if (!restaurant) {
@@ -119,15 +68,20 @@ const RestaurantDetailsPage = () => {
     <div>
       <SearchBar />
 
-      <DatePickerForm time={time}
-        onChangeTime={setTime}
-        date={startDate}
-        onChange={setStartDate} />
-
       <div className='rest-page-container'>
-        <div>
+        <div className='rest-details-button-cont'>
           <button className='rest-details-btn' onClick={() => navigate(-1)}>Go Back</button>
         </div>
+        <div className='reservation-title'>
+          <h2>Make your reservation:</h2>
+        </div>
+        <div className='message-wrapper'>
+          <DatePickerForm onSubmit={handleReserve} />
+          {isPopUpOpen && <div className='message'>
+            <IoIosCheckmarkCircle />Successful reservation</div>}
+        </div>
+
+
         <div className='rest-details-wrapper'>
           <div className='rest-photo'>
             <img className='rest-details-photo' src={restaurant.image_url} alt="" />

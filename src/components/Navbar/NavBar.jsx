@@ -10,13 +10,14 @@ import Slogan from '../Slogan/Slogan';
 // import PopUpBurgerMenu from './PopUpBurgerMenu';
 import Logo from "../../assets/logo.png";
 
+
 const navBarConfig = [{
   link: '/',
   title: 'Home'
 },
 {
-  link: '/blog',
-  title: 'Blog',
+  link: '/blogs',
+  title: 'Blogs',
 }, {
   link: '/about',
   title: 'About',
@@ -29,7 +30,7 @@ const navBarConfig = [{
   title: 'Login',
 }]
 
-const Navbar = () => {
+const Navbar = ({user, onLogOut}) => {
   return (
     <div>
       <nav className='nav'>
@@ -37,12 +38,15 @@ const Navbar = () => {
         <Link className='' to='/'>
           <img className='logo-style' src={Logo} alt="logo" />
         </Link>
-        <h1 className='title'>FlaverFinds</h1>
+        <h1 className='title'>FlavorFinds</h1>
         <Link to='/'></Link>
         <ul className='nav-list'>
           {navBarConfig.map(item => (
             <li key={item.title}>
-              <Link to={item.link}>{item.title} </Link>
+              { (item.title !== 'Login') ? ( <Link to={item.link}>{item.title}</Link>): 
+              (!user ? <Link to={item.link}>{item.title} 
+              </Link>:<button className='logout-style' onClick={()=>onLogOut(null)}>LogOut</button>)
+               }
             </li>
           ))}
         </ul>

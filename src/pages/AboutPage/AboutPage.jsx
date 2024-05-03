@@ -10,11 +10,11 @@ const AboutPage = () => {
             GO HOME
           </Link>
       <h3 className="about-title">
-        Welcome To FlaverFinds App!
+        Welcome To FlavorFinds App!
       </h3>
       <div className="content">
       <p>
-        FlaverFinds App is a Professional food Platform. Here we will provide you only
+        FlavorFinds App is a Professional food Platform. Here we will provide you only
         interesting content, which you will like very much. We're dedicated to
         providing you the best of food, with a focus
         on dependability and reserve the table. We're
